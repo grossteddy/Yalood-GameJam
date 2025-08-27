@@ -4,7 +4,8 @@ public class BalloonScript : MonoBehaviour
 {
     [Range(0,100)][SerializeField] float balloonInflation;
     [Range(0.1f, 20)][SerializeField] float deflationSpeed;
-    [Range(100, 300)][SerializeField] float balloonPopZone;
+    [Range(80, 150)][SerializeField] float balloonPopZone = 100f;
+    [SerializeField] GameObject poppedBalloon;
 
     private BalloonFloatScript floatScript;
     private SkinnedMeshRenderer SkinnedMeshRenderer;
@@ -46,7 +47,9 @@ public class BalloonScript : MonoBehaviour
 
     private void BallooonPop()
     {
-        //logic for balloonPopping
+        poppedBalloon.transform.parent = null;
+        poppedBalloon.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     public float GetDeflationSpeed()
