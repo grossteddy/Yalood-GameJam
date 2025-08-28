@@ -8,40 +8,47 @@ public class BalloonScript : MonoBehaviour
     [SerializeField] GameObject poppedBalloon;
 
     private BalloonFloatScript floatScript;
-    private SkinnedMeshRenderer SkinnedMeshRenderer;
+    private SkinnedMeshRenderer skinnedMeshRenderer;
     private int blendShapeIndex;
+    private bool popped = false;
 
     void Awake()
     {
         floatScript = GetComponent<BalloonFloatScript>();
-        SkinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
-        blendShapeIndex = SkinnedMeshRenderer.sharedMesh.GetBlendShapeIndex("Inflated");
+        skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
+        blendShapeIndex = skinnedMeshRenderer.sharedMesh.GetBlendShapeIndex("Inflated");
     }
     
     void OnEnable()
     {
         balloonInflation = 0;
+        popped = false;
     }
 
     void Update()
     {
-        Inflate(0.1f);
-        SetInflationInBalloon();
-        Deflate();
+        if (!popped)
+        {
+            SetInflationInBalloon();
+            Deflate();
+        }
     }
 
     public void Inflate(float inflationAir)
     {
-        balloonInflation += inflationAir;
-        if (balloonInflation > balloonPopZone)
+        if (!popped)
         {
-            BallooonPop();
+            balloonInflation += inflationAir;
+            if (balloonInflation > balloonPopZone)
+            {
+                BallooonPop();
+            }
         }
     }
 
     private void SetInflationInBalloon()
     {
-        SkinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, balloonInflation);
+        skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, balloonInflation);
         floatScript.SetInflationLevel(Mathf.InverseLerp(0,100, balloonInflation));
     }
 
@@ -49,7 +56,15 @@ public class BalloonScript : MonoBehaviour
     {
         poppedBalloon.transform.parent = null;
         poppedBalloon.SetActive(true);
-        gameObject.SetActive(false);
+
+
+        popped = true;
+        balloonInflation = 0;
+        skinnedMeshRenderer.SetBlendShapeWeight(blendShapeIndex, balloonInflation);
+        floatScript.SetInflationLevel(balloonInflation);
+        skinnedMeshRenderer.enabled = false;
+
+        //gameObject.SetActive(false);
     }
 
     public float GetDeflationSpeed()
