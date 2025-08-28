@@ -64,7 +64,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 253309738790339248}
@@ -173,8 +173,6 @@ MonoBehaviour:
   balloonInflation: 0
   deflationSpeed: 0.1
   balloonPopZone: 100
-  deflatedAnchor: {fileID: 0}
-  InflatedAnchor: {fileID: 0}
   poppedBalloon: {fileID: 0}
 --- !u!114 &8553407006265534703
 MonoBehaviour:
@@ -190,6 +188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BalloonFloatScript
   liftForce: 3
   InflationLevel: 0
+  deflatedAnchor: {fileID: 0}
+  InflatedAnchor: {fileID: 0}
 --- !u!136 &6564516356528240256
 CapsuleCollider:
   m_ObjectHideFlags: 0

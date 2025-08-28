@@ -881,6 +881,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4410388696807636228, guid: 2d190d013eec9404586810fb93642347, type: 3}
+      propertyPath: m_Anchor.z
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4410388696807636228, guid: 2d190d013eec9404586810fb93642347, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 1743570096}
