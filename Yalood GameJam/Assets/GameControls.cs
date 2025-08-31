@@ -109,20 +109,18 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BankBalloon"",
+                    ""type"": ""Button"",
+                    ""id"": ""52b8a0da-6cfe-4426-a668-5238ed583ae8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""ff5b93e7-53f8-4029-97af-a0dc3315413c"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""7d68dc6a-877c-4a44-be9c-5aec90c6bec1"",
@@ -142,6 +140,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PauseButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e4d33c4-1528-4431-93a0-bfa897bd348b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BankBalloon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -202,6 +211,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Pump = m_Gameplay.FindAction("Pump", throwIfNotFound: true);
         m_Gameplay_PauseButton = m_Gameplay.FindAction("PauseButton", throwIfNotFound: true);
+        m_Gameplay_BankBalloon = m_Gameplay.FindAction("BankBalloon", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_PauseButton = m_UI.FindAction("PauseButton", throwIfNotFound: true);
@@ -289,6 +299,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Pump;
     private readonly InputAction m_Gameplay_PauseButton;
+    private readonly InputAction m_Gameplay_BankBalloon;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -308,6 +319,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/PauseButton".
         /// </summary>
         public InputAction @PauseButton => m_Wrapper.m_Gameplay_PauseButton;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/BankBalloon".
+        /// </summary>
+        public InputAction @BankBalloon => m_Wrapper.m_Gameplay_BankBalloon;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -340,6 +355,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @PauseButton.started += instance.OnPauseButton;
             @PauseButton.performed += instance.OnPauseButton;
             @PauseButton.canceled += instance.OnPauseButton;
+            @BankBalloon.started += instance.OnBankBalloon;
+            @BankBalloon.performed += instance.OnBankBalloon;
+            @BankBalloon.canceled += instance.OnBankBalloon;
         }
 
         /// <summary>
@@ -357,6 +375,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @PauseButton.started -= instance.OnPauseButton;
             @PauseButton.performed -= instance.OnPauseButton;
             @PauseButton.canceled -= instance.OnPauseButton;
+            @BankBalloon.started -= instance.OnBankBalloon;
+            @BankBalloon.performed -= instance.OnBankBalloon;
+            @BankBalloon.canceled -= instance.OnBankBalloon;
         }
 
         /// <summary>
@@ -518,6 +539,13 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPauseButton(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "BankBalloon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnBankBalloon(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

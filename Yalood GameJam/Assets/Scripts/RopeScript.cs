@@ -40,4 +40,9 @@ public class RopeScript : MonoBehaviour
             }
         }
     }
+
+    public void ChangeBalloonHook(CapsuleCollider newBalloonHook)
+    {
+        balloonHook = newBalloonHook;
+    }
 }
